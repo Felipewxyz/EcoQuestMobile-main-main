@@ -19,30 +19,10 @@ import * as ImagePicker from 'expo-image-picker';
 export default function Cadastro() {
   const navigation = useNavigation();
   const [senhaVisivel, setSenhaVisivel] = useState(false);
-  const [fotoPerfil, setFotoPerfil] = useState(null);
   const [nome, setNome] = useState('');
   const [usuario, setUsuario] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-
-  // 🔹 Escolher imagem de perfil
-  const escolherImagem = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== 'granted') {
-      Alert.alert('Permissão necessária', 'Precisamos da sua permissão para acessar as fotos.');
-      return;
-    }
-
-    const result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setFotoPerfil(result.assets[0].uri);
-    }
-  };
 
   const handleCadastro = async () => {
     if (!nome || !usuario || !email || !senha) {
@@ -119,17 +99,6 @@ export default function Cadastro() {
             style={styles.logo}
             resizeMode="contain"
           />
-
-          <TouchableOpacity style={styles.fotoContainer} onPress={escolherImagem}>
-            {fotoPerfil ? (
-              <Image source={{ uri: fotoPerfil }} style={styles.fotoPerfil} />
-            ) : (
-              <View style={styles.fotoPlaceholder}>
-                <Ionicons name="person-outline" size={60} color="#156499" />
-                <Text style={styles.textoFoto}>Adicionar foto de perfil</Text>
-              </View>
-            )}
-          </TouchableOpacity>
 
           <Text style={styles.title}>CADASTRE-SE AQUI</Text>
 
@@ -264,37 +233,5 @@ const styles = StyleSheet.create({
   EyeIcon: {
     marginLeft: 10,
     marginRight: 10,
-  },
-  fotoContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 25,
-    width: 200,
-    height: 180,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: '#fff',
-    backgroundColor: 'rgba(255,255,255,0.5)',
-    overflow: 'hidden',
-    alignSelf: 'center',
-  },
-  fotoPerfil: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 20,
-  },
-  fotoPlaceholder: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textoFoto: {
-    color: '#156499',
-    fontSize: 14,
-    marginTop: 8,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
+  }
 });
