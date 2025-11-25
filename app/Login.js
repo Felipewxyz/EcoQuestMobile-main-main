@@ -18,7 +18,7 @@ export default function Login() {
     try {
       const URL = "https://ecoquest-backend-zfi8.onrender.com/api";
 
-      const response = await fetch(`${URL}/users/login`, {
+      const response = await fetch(`${URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, senha })
@@ -42,8 +42,6 @@ export default function Login() {
       const dados = JSON.parse(text);
 
       Alert.alert("Sucesso", "Login realizado!");
-
-      // se quiser salvar token, usuário, etc, depois te ajudo com isso
 
       router.push("/Home");
 
