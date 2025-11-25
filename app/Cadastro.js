@@ -54,14 +54,13 @@ export default function Cadastro() {
       const URL = "https://ecoquest-backend-zfi8.onrender.com/api";
 
       const body = {
-        nome: nome,
+        name: nome,
         username: usuario,
         email: email,
         password: senha
       };
 
-      // FAZENDO A REQUISIÇÃO
-      const response = await fetch(`${URL}/users`, {
+      const response = await fetch(`${URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
