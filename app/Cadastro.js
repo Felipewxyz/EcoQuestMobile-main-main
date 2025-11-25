@@ -57,7 +57,7 @@ export default function Cadastro() {
         nome: nome,
         username: usuario,
         email: email,
-        senha: senha
+        password: senha
       };
 
       // FAZENDO A REQUISIÇÃO
